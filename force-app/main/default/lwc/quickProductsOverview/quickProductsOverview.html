@@ -1,0 +1,54 @@
+<template>
+    <div class="slds-box slds-theme_default">
+        <lightning-spinner lwc:if={isLoading} alternative-text="Loading" size="small"></lightning-spinner>
+
+        <lightning-layout multiple-rows="true">
+            <lightning-layout-item padding="around-small" size="12">
+                <div class="clds-search-products">
+                    <lightning-input type="text" variant="label-hidden" placeholder="Search..."></lightning-input>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item padding="around-small" size="12">
+                <lightning-layout>
+                    <lightning-layout-item padding="around-small" size="9">
+                        <div class="clds-all-products">
+                            <lightning-datatable
+                                key-field="Id"
+                                data={products}
+                                columns={columns}
+                                hide-checkbox-column
+                                enable-infinite-loading
+                                is-loading={isLoading}
+                                onloadmore={handleLoadProducts}
+                                show-row-number-column="true">
+                            </lightning-datatable>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item padding="around-small" size="3">
+                        <div class="clds-products-overview">
+                            <div class="slds-grid slds-grid_vertical">
+                                <div class="slds-col clds-info-box">
+                                    <h3><span>{totalProductsAmount}</span> pcs</h3>
+                                    <p class="clds-additional-info">Quantity of Products</p>
+                                    <a class="link-text" onclick={handleNewProductCreation}>Create a new Product</a>
+                                </div>
+                                <div class="slds-col clds-info-box">
+                                    <h3>Company Orders</h3>
+                                    <p class="clds-additional-info">Information on the activity of orders and items for individual company</p>
+                                    <lightning-record-picker
+                                        label="Accounts"
+                                        variant="label-hidden"
+                                        placeholder="Search Accounts..."
+                                        object-api-name="Account"
+                                        onchange={handleAccountOrdersInfo}>
+                                    </lightning-record-picker>
+                                    <pre class="clds-additional-result" lwc:ref="companyOrders"></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+</template>

@@ -1,0 +1,7 @@
+<template>
+    <div lwc:if={loadedExternalSource} class="slds-box slds-theme_default">
+        <div class="slds-grid slds-grid_align-center">
+            <json-form class="slds-col" schema={productsConfig} onchange={handleProductSetting} lwc:external></json-form>
+        </div>
+    </div>
+</template>

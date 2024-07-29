@@ -1,0 +1,2 @@
+1. Use Third-Party Web Components in LWC (Beta)
+2. Navigate to a URL-Addressable Lightning Web Component

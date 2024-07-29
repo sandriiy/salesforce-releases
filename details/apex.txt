@@ -1,0 +1,3 @@
+1. Use Cursors for Expanded SOQL Query Result Support (Beta)
+2. Evaluate Dynamic Formulas in Apex (Beta)
+3. Support for Five-Level Parent-to-Child Relationship SOQL Queries in Apex
