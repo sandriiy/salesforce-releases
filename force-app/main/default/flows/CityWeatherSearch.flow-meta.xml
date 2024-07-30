@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Obtaining the weather for the specified city</description>
+        <name>CityWeather</name>
+        <label>City Weather</label>
+        <locationX>176</locationX>
+        <locationY>134</locationY>
+        <actionName>OpenWeather.Call Weather</actionName>
+        <actionType>externalService</actionType>
+        <connector>
+            <targetReference>AssignResponse</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>q</name>
+            <value>
+                <elementReference>city</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>appid</name>
+            <value>
+                <elementReference>$Label.OpenWeatherKey</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>OpenWeather.Call Weather</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+        <versionSegment>1</versionSegment>
+    </actionCalls>
+    <apiVersion>61.0</apiVersion>
+    <assignments>
+        <description>Serialize the JSON response into the appropriate format for further access.</description>
+        <name>AssignResponse</name>
+        <label>Assign Response</label>
+        <locationX>176</locationX>
+        <locationY>242</locationY>
+        <assignmentItems>
+            <assignToReference>weather_response_actual</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>CityWeather.2XX.main.temp</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>weather_response_feels</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>CityWeather.2XX.main.feelsx5flike</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <description>Retrieve up-to-the-minute city weather from a third-party provider.</description>
+    <environments>Default</environments>
+    <interviewLabel>City Weather Search {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>City Weather Search</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>CityWeather</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>The input value of the city name for the weather analysis</description>
+        <name>city</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <elementReference>$User.City</elementReference>
+        </value>
+    </variables>
+    <variables>
+        <description>Actual weather in the region/city</description>
+        <name>weather_response_actual</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <description>Feels like weather in the region/city</description>
+        <name>weather_response_feels</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

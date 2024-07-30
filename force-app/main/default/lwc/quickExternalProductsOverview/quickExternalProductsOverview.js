@@ -14,8 +14,7 @@ export default class QuickExternalProductsOverview extends LightningElement {
     }
 
     handleProductSetting(event) {
-        console.log('new changes');
-        console.log(event.detail);
+        // ...
     }
 
     get loadedExternalSource() {

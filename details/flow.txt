@@ -1,2 +1,2 @@
 1. Let Einstein Build a Draft Flow for You (Beta)
-2. Action Buttons in Flow
+2. Action Buttons in Flow (Beta)

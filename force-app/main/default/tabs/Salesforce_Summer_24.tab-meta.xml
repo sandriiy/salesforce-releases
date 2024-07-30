@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Manage products and orders using the new features in the Salesforce Summer &apos;24 Release. Handle large datasets, integrate third-party web components, utilize single-screen flow capabilities, and much more.</description>
+    <flexiPage>Salesforce_Summer_24</flexiPage>
+    <label>Salesforce Summer &apos;24</label>
+    <motif>Custom43: Jewel</motif>
+</CustomTab>

@@ -2,7 +2,7 @@ String iterativeProductName = 'Product Name #{0}';
 String iterativeProductCode = 'P-{0}';
 
 List<Product2> newProducts = new List<Product2>();
-for (Integer i = 0; i < 1; i++) {
+for (Integer i = 0; i < 500; i++) {
     Product2 newProduct = new Product2();
     newProduct.Name = String.format(iterativeProductName, new List<Object>{Math.random()*i});
     newProduct.ProductCode = String.format(iterativeProductCode, new List<Object>{i});

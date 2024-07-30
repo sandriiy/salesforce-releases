@@ -15,7 +15,8 @@ const COLUMNS = [
 
 export default class QuickProductsOverview extends LightningElement {
     columns = COLUMNS;
-    isLoading = false;
+    isLoadingOverview = false;
+    isLoadingDatatable = false;
     products = [];
     totalProductsAmount = 0;
 
@@ -34,7 +35,7 @@ export default class QuickProductsOverview extends LightningElement {
     }
 
     handleLoadProducts(event) {
-        this.isLoading = true;
+        this.isLoadingDatatable = true;
 
         let currentNumberOfProducts = this.products.length;
         getProductsScope({ startPosition: currentNumberOfProducts, scope: DATA_LOAD_SCOPE })
@@ -43,7 +44,7 @@ export default class QuickProductsOverview extends LightningElement {
                 this.products = updatedRecords;
 		    })
             .finally(() => {
-                this.isLoading = false;
+                this.isLoadingDatatable = false;
             });
     }
 
@@ -56,7 +57,7 @@ export default class QuickProductsOverview extends LightningElement {
     async handleAccountOrdersInfo(event) {
         let selectedAccountId = event.detail.recordId;
         if (selectedAccountId != null) {
-            this.isLoading = true;
+            this.isLoadingOverview = true;
 
             await getAccountOrdersInfo({ accountId: selectedAccountId })
 		        .then(result => {
@@ -64,7 +65,7 @@ export default class QuickProductsOverview extends LightningElement {
                     accoundOrders.textContent = JSON.stringify(result, undefined, 2);
 		        });
 
-            this.isLoading = false;
+            this.isLoadingOverview = false;
         }
     }
 

@@ -5,8 +5,15 @@ global without sharing class QuickProductController {
             // Verification of the specified query
             Database.Cursor locator = Database.getCursor('SELECT Id, Name, ProductCode, IsActive FROM Product2');
 
-            List<Product2> productsChunk = locator.fetch(startPosition, scope); // locator.getNumRecords()
-            return productsChunk;
+            Integer endPosition = startPosition + scope;
+            if (locator.getNumRecords() < endPosition && locator.getNumRecords() > startPosition) {
+                Integer endCursorCount = locator.getNumRecords() - startPosition;
+                return (List<Product2>) locator.fetch(startPosition, endCursorCount);
+            } else if (locator.getNumRecords() > startPosition) {
+                return (List<Product2>) locator.fetch(startPosition, scope);
+            } else {
+                return new List<Product2>();
+            }
 
             // Maximum number of rows per cursor: 50 million (both synchronous and asynchronous)
             // Maximum number of fetch calls per transaction: 10 (both synchronous and asynchronous) 
